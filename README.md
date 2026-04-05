@@ -10,6 +10,8 @@
 [![Click](https://img.shields.io/badge/Click-CLI-7209b7?style=flat-square&logo=gnu-bash&logoColor=white)](https://click.palletsprojects.com)
 [![Rich](https://img.shields.io/badge/Rich-Terminal_UI-f72585?style=flat-square)](https://rich.readthedocs.io)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)]()
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)]()
 
 **Part of the [90 Local LLM Projects](https://github.com/kennedyraju55/90-local-llm-projects) collection**
 
@@ -23,6 +25,83 @@
 </div>
 
 ---
+
+
+## 🐳 Docker Deployment
+
+Run this project instantly with Docker — no local Python setup needed!
+
+### Quick Start with Docker
+
+```bash
+# Clone and start
+git clone https://github.com/kennedyraju55/research-paper-qa.git
+cd research-paper-qa
+docker compose up
+
+# Access the web UI
+open http://localhost:8501
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up` | Start app + Ollama |
+| `docker compose up -d` | Start in background |
+| `docker compose down` | Stop all services |
+| `docker compose logs -f` | View live logs |
+| `docker compose build --no-cache` | Rebuild from scratch |
+
+### Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐
+│   Streamlit UI  │────▶│   Ollama + LLM  │
+│   Port 8501     │     │   Port 11434    │
+└─────────────────┘     └─────────────────┘
+```
+
+> **Note:** First run will download the Gemma 4 model (~5GB). Subsequent starts are instant.
+
+---
+
+
+
+---
+
+## ⚡ REST API
+
+Every project includes a FastAPI REST API with auto-generated docs.
+
+### Start the API Server
+
+```bash
+# Run directly
+uvicorn src.research_qa.api:app --reload --port 8000
+
+# Or with Docker
+docker compose up
+```
+
+### API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/health` | Health check |
+| `GET` | `/docs` | Interactive Swagger UI |
+| `GET` | `/redoc` | ReDoc documentation |
+| `POST` | `/analyze` | Main analysis endpoint |
+
+### Example Request
+
+```bash
+curl -X POST http://localhost:8000/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"text": "your input here"}'
+```
+
+> 📖 Visit `http://localhost:8000/docs` for the full interactive API documentation.
 
 ## 🧐 Why This Project?
 
